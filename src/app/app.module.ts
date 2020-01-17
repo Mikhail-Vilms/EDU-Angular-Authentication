@@ -7,22 +7,49 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
-import { UserService } from './shared/user.service';
+
 import { LoginComponent } from './user/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { LayoutModule } from '@angular/cdk/layout';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatSidenavModule } from '@angular/material/sidenav';
+// import { MatIconModule } from '@angular/material/icon';
+// import { MatListModule } from '@angular/material/list';
+import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
+
+// Custom components
+import { FrontpageComponent } from './frontpage/frontpage.component';
+import { SignupComponent } from './signup/signup.component';
+
+// Angular material components
+import { MaterialModule } from './material.module';
+
+// Custom Services
+import { UserService } from './shared/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    MainToolbarComponent,
+    SignupComponent,
+    FrontpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    
+    // Angular material components
+    MaterialModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
