@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,8 +10,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class SignupComponent implements OnInit {
   signupFormGroup: FormGroup;
   requiredAlert: string = 'This field is required';
-  
-  constructor(private fb: FormBuilder) { }
+
+  constructor(
+    private fb: FormBuilder, 
+    private usersService: UsersService) { }
 
   ngOnInit() {
     this.createSignupForm();
@@ -24,6 +27,8 @@ export class SignupComponent implements OnInit {
       confirm: ['', Validators.required],
     });
   }
+
+  // ==================================== USERNAME ============================================
 
   checkUsername(control){
     let enteredUsername = control.value;
@@ -47,6 +52,8 @@ export class SignupComponent implements OnInit {
     return '';
   }
 
+  // ==================================== EMAIL ============================================
+
   checkEmail(control) {
     let enteredEmail = control.value;
     
@@ -65,11 +72,13 @@ export class SignupComponent implements OnInit {
       return this.requiredAlert;
     } 
     if (emailCtrl.hasError('pattern')){
-      return 'Not a valid emailaddress';
+      return 'Not a valid email address';
     }
 
     return '';
   }
+
+  // ==================================== PASSWORD ============================================
 
   checkPassword(control) {
     let enteredPassword = control.value
@@ -79,19 +88,47 @@ export class SignupComponent implements OnInit {
     //.{4,} : Minimum 4 characters
     let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{4,}$/;
     
-    return (enteredPassword && !passwordRegex.test(enteredPassword)) ? { 'requirements': true } : null;
+    return (enteredPassword && !passwordRegex.test(enteredPassword)) ? { 'pattern': true } : null;
   }
 
   getErrorPassword() {
     let passwordCtrl = this.signupFormGroup.get('password');
 
     if (passwordCtrl.hasError('required')){
-      return 'Field is required (at least eight characters, one uppercase letter and one number)';
+      return 'Field is required (at least four characters and uppercase letter)';
     }
-    if (passwordCtrl.hasError('requirements')){
-      return 'Password needs to be at least eight characters, one uppercase letter and one number';
+    if (passwordCtrl.hasError('pattern')){
+      return 'Password needs to be at least four characters and one uppercase letter';
     }
 
     return '';
+  }
+
+  // ==================================== CONFIRM ============================================
+  
+  getErrorConfirm() {
+    let confirmCtrl = this.signupFormGroup.get('confirm');
+
+    if (confirmCtrl.hasError('required')){
+      return this.requiredAlert;
+    }
+
+    return '';
+  }
+
+  // ========================================= SUBMIT ===================================================
+  
+  onSubmit(){
+    console.log("==== onSubmit ====");
+    
+    if (!this.signupFormGroup.valid){
+      console.log("==== VALIDATION FAILED ====");
+      return;
+    }
+
+    this.usersService.register(
+      this.signupFormGroup.value.username, 
+      this.signupFormGroup.value.email,
+      this.signupFormGroup.value.password);
   }
 }

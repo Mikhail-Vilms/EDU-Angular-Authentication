@@ -12,11 +12,6 @@ import { LoginComponent } from './user/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from '@angular/cdk/layout';
-// import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatSidenavModule } from '@angular/material/sidenav';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatListModule } from '@angular/material/list';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 
 // Custom components
@@ -27,7 +22,7 @@ import { SignupComponent } from './signup/signup.component';
 import { MaterialModule } from './material.module';
 
 // Custom Services
-import { UserService } from './shared/user.service';
+import { UserService } from './shared/user.serviceunused';
 
 @NgModule({
   declarations: [
