@@ -11,17 +11,34 @@ export class UsersService {
   constructor(private http: HttpClient) { }
   
   // This function will send POST requset to back-end WEB API to create new user
-  register(userName, email, password) {
-    console.log("userName: " + userName);
+  registerPost(username, email, password) {
+    console.log(" == registerPost == ");
+
+    console.log("username: " + username);
     console.log("email: " + email);
     console.log("password: " + password);
     
     var body = {
-      UserName: userName,
+      UserName: username,
       Email: email,
       Password: password
     };
 
-    // return this.http.post(this.BaseURI + '/api/ApplicationUser/Register', body);
+    return this.http.post(this.BaseURI + '/api/ApplicationUser/Register', body);
+  }
+
+  // This function will send POST requset to back-end WEB API to login user
+  loginPost(username, password) {
+    console.log(" == loginPost == ");
+    
+    console.log("username: " + username);
+    console.log("password: " + password);
+
+    var body = {
+      UserName: username,
+      Password: password
+    };
+
+    return this.http.post(this.BaseURI + '/api/ApplicationUser/Login', body);
   }
 }

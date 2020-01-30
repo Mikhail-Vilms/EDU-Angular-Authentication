@@ -5,10 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { RegistrationComponent } from './user/registration/registration.component';
 
-import { LoginComponent } from './user/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -17,22 +14,29 @@ import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 // Custom components
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { SignupComponent } from './signup/signup.component';
+import { SignupSuccessComponent } from './signup-success/signup-success.component';
 
 // Angular material components
 import { MaterialModule } from './material.module';
+import { SigninComponent } from './signin/signin.component';
+import { HomeComponent } from './home/home.component';
+import { HomeToolbarComponent } from './home-toolbar/home-toolbar.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 // Custom Services
-import { UserService } from './shared/user.serviceunused';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    RegistrationComponent,
-    LoginComponent,
     MainToolbarComponent,
     SignupComponent,
-    FrontpageComponent
+    FrontpageComponent,
+    SignupSuccessComponent,
+    SigninComponent,
+    HomeComponent,
+    HomeToolbarComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,7 @@ import { UserService } from './shared/user.serviceunused';
     // Angular material components
     MaterialModule
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
